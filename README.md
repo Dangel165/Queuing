@@ -5,8 +5,8 @@ Facebook, Twitter의 로그인 페이지를 복제한 피싱 공격 도구입니
 ## 🎯 피싱 공격 기능
 
 ### 🔍 사이트 복제
-- **Facebook**: 실제 Facebook 로그인 페이지와 100% 동일한 디자인  
-- **Twitter(X)**: 실제 Twitter 로그인 페이지와 100% 동일한 디자인
+- **Facebook**: 실제 Facebook 로그인 페이지 디자인  
+- **Twitter(X)**: 실제 Twitter 로그인 페이지 디자인
 - 피해자가 구별할 수 없는  복제본
 
 ### 📱 QR 코드 피싱
@@ -113,10 +113,8 @@ python 큐싱(Qshing).py qr
 ├── requirements.txt            # Python 패키지 목록
 ├── README.md                  # 피싱 공격 가이드
 └── templates/                 # 가짜 페이지 템플릿
-    ├── index.html             # 피싱 메인 페이지
     ├── facebook.html          # 가짜 Facebook 로그인
     ├── twitter.html           # 가짜 Twitter 로그인
-    └── admin.html             # 공격자 대시보드
 ```
 
 ## ⚠️ 법적 경고
@@ -133,3 +131,4 @@ python 큐싱(Qshing).py qr
 
 
 **⚠️ 면책 조항**: 이 도구는 사이버 보안 교육 및 침투 테스트 목적으로만 제작되었습니다. 불법적인 용도로 사용할 경우 발생하는 모든 법적 책임은 사용자에게 있습니다. 개발자는 이 도구의 오남용에 대해 일체의 책임을 지지 않습니다.
+
