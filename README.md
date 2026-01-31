@@ -40,7 +40,6 @@ python 큐싱(Qshing).py qr
 - **메인 페이지**: http://localhost:5000
 - **가짜 Facebook**: http://localhost:5000/facebook
 - **가짜 Twitter**: http://localhost:5000/twitter
-- **공격자 패널**: http://localhost:5000/admin
 
 ### QR 코드 피싱 생성
 피싱 QR 코드 생성:
@@ -127,6 +126,7 @@ python 큐싱(Qshing).py qr
 
 
 **⚠️ 면책 조항**: 이 도구는 사이버 보안 교육 및 침투 테스트 목적으로만 제작되었습니다. 불법적인 용도로 사용할 경우 발생하는 모든 법적 책임은 사용자에게 있습니다. 개발자는 이 도구의 오남용에 대해 일체의 책임을 지지 않습니다.
+
 
 
 
