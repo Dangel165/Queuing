@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소셜 미디어 로그인</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .platform-card.facebook {
+            border-color: #1877F2;
+        }
+
+        .platform-card.twitter {
+            border-color: #1DA1F2;
+        }
+
+        .platform-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+        }
+
+        .facebook .platform-icon {
+            background: #1877F2;
+        }
+
+        .twitter .platform-icon {
+            background: #1DA1F2;
+        }
+
+        .platform-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .platform-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .facebook .platform-btn {
+            background: #1877F2;
+        }
+
+        .twitter .platform-btn {
+            background: #1DA1F2;
+        }
+
+        .platform-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .admin-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .admin-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-link a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            text-align: center;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .platforms {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 소셜 미디어 로그인</h1>
+            <p>Facebook, Twitter 로그인 페이지를 체험해보세요</p>
+        </div>
+
+        <div class="platforms">
+            <div class="platform-card facebook">
+                <div class="platform-icon">👥</div>
+                <div class="platform-name">Facebook</div>
+                <p>Facebook 로그인 페이지로 이동합니다</p>
+                <a href="/facebook" class="platform-btn">Facebook 로그인</a>
+            </div>
+
+            <div class="platform-card twitter">
+                <div class="platform-icon">🐦</div>
+                <div class="platform-name">Twitter</div>
+                <p>Twitter 로그인 페이지로 이동합니다</p>
+                <a href="/twitter" class="platform-btn">Twitter 로그인</a>
+            </div>
+        </div>
+
+        <div class="admin-link">
+            <a href="/admin">📊 관리자 패널 (로그인 시도 확인)</a>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ 주의사항:</strong> 테스트 목적으로 제작되었습니다. 실제 계정 정보를 입력하지 마세요!<br>
+            아무 아이디/비밀번호나 입력하면 로그인되고 실제 사이트로 이동합니다.<br>
+            <strong>📱 QR 코드가 필요하면 qr_generator.py를 실행하세요!</strong>
+        </div>
+    </div>
+</body>
+</html>

