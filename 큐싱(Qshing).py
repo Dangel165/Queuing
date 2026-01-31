@@ -15,7 +15,6 @@ app = Flask(__name__)
 app.secret_key = 'social_login_app_2024'
 
 def show_black_star_logo():
-    """Black Star 로고 표시"""
     print("\033[2J\033[H")  # 화면 클리어
     print()
     print("██████╗ ██╗      █████╗  ██████╗██╗  ██╗    ███████╗████████╗ █████╗ ██████╗ ")
@@ -374,4 +373,5 @@ if __name__ == '__main__':
         print("\n\n프로그램이 중단되었습니다.")
     except Exception as e:
         print(f"\n오류가 발생했습니다: {e}")
+
         input("Enter 키를 눌러 종료하세요...")
